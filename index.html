@@ -25,6 +25,58 @@
       overflow-x: hidden;
     }
 
+    /* ── TOP BAR ── */
+    .top-bar {
+      width: 100%;
+      background: #0d0c0c;
+      border-bottom: 1px solid rgba(184,151,90,0.15);
+      padding: 10px 48px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 32px;
+    }
+    .top-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .top-bar-item svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .top-bar-item .label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-right: 2px;
+    }
+    .top-bar-item a,
+    .top-bar-item span.value {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--off-white);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .top-bar-item a:hover { color: var(--gold-light); }
+    .top-bar-divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(184,151,90,0.2);
+    }
+
     /* ── BANNER ── */
     header {
       position: relative;
@@ -83,23 +135,17 @@
       overflow: hidden;
       background: #0a0a0a;
     }
-
-    /* ── SLIDE — hidden by default ── */
     .slide {
-      position: absolute;   /* ← all slides sit on top of each other */
+      position: absolute;
       inset: 0;
-      opacity: 0;           /* ← hidden by default */
+      opacity: 0;
       transition: opacity 1.1s ease-in-out;
       pointer-events: none;
     }
-
-    /* ── ACTIVE SLIDE — visible ── */
     .slide.active {
       opacity: 1;
       pointer-events: auto;
     }
-
-    /* ── IMAGE ── */
     .slide img {
       width: 100%;
       height: 100%;
@@ -107,8 +153,6 @@
       object-position: center center;
       display: block;
     }
-
-    /* subtle vignette overlay */
     .slide::after {
       content: '';
       position: absolute;
@@ -194,7 +238,15 @@
       text-align: center;
     }
 
+    /* ── MOBILE ── */
     @media (max-width: 600px) {
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 20px;
+      }
+      .top-bar-divider { display: none; }
       header { padding: 20px 24px 16px; }
       .banner-name { font-size: 22px; }
       .slideshow-wrap { height: 300px; margin: 20px auto; }
@@ -206,6 +258,44 @@
 </head>
 <body>
 
+  <!-- ── TOP CONTACT BAR ── -->
+  <div class="top-bar">
+    <!-- Address -->
+    <div class="top-bar-item">
+      <!-- pin icon -->
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+        <circle cx="12" cy="9" r="2.5"/>
+      </svg>
+      <span class="value">120 N Pacific St, Unit A-11, San Marcos, CA 92069</span>
+    </div>
+
+    <div class="top-bar-divider"></div>
+
+    <!-- Showroom phone -->
+    <div class="top-bar-item">
+      <!-- phone icon -->
+      <svg viewBox="0 0 24 24">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.13 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      <span class="label">Showroom</span>
+      <a href="tel:8775728244">877-572-8244</a>
+    </div>
+
+    <div class="top-bar-divider"></div>
+
+    <!-- Call or text -->
+    <div class="top-bar-item">
+      <!-- message icon -->
+      <svg viewBox="0 0 24 24">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+      </svg>
+      <span class="label">Call or Text</span>
+      <a href="tel:7609978141">760-997-8141</a>
+    </div>
+  </div>
+
+  <!-- ── HEADER ── -->
   <header>
     <span class="banner-rule"></span>
     <p class="banner-eyebrow">San Marcos, California</p>
@@ -214,6 +304,7 @@
     <span class="banner-rule"></span>
   </header>
 
+  <!-- ── SLIDESHOW ── -->
   <div class="slideshow-wrap" id="slideshow">
     <div class="slide active"><img src="images/slide01.jpg" alt="Interior Design 1" loading="eager" /></div>
     <div class="slide"><img src="images/slide02.jpg" alt="Interior Design 2" loading="lazy" /></div>
@@ -229,7 +320,6 @@
     <div class="slide"><img src="images/slide12.jpg" alt="Interior Design 12" loading="lazy" /></div>
     <div class="slide"><img src="images/slide13.jpg" alt="Interior Design 13" loading="lazy" /></div>
     <div class="slide"><img src="images/slide14.jpg" alt="Interior Design 14" loading="lazy" /></div>
-
     <button class="arrow arrow-prev" id="prev" aria-label="Previous slide">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
@@ -239,6 +329,7 @@
     <div class="dots" id="dots"></div>
   </div>
 
+  <!-- ── FOOTER ── -->
   <footer>
     <p>&copy; 2025 Freedom Flooring &amp; Interiors &nbsp;&bull;&nbsp; San Marcos, CA</p>
   </footer>
@@ -248,7 +339,6 @@
     const dotsEl = document.getElementById('dots');
     let current = 0;
     let timer;
-
     slides.forEach((_, i) => {
       const d = document.createElement('button');
       d.className = 'dot' + (i === 0 ? ' active' : '');
@@ -256,9 +346,7 @@
       d.addEventListener('click', () => goTo(i));
       dotsEl.appendChild(d);
     });
-
     function getDots() { return Array.from(dotsEl.querySelectorAll('.dot')); }
-
     function goTo(n) {
       slides[current].classList.remove('active');
       getDots()[current].classList.remove('active');
@@ -267,20 +355,16 @@
       getDots()[current].classList.add('active');
       resetTimer();
     }
-
     function resetTimer() {
       clearInterval(timer);
       timer = setInterval(() => goTo(current + 1), 5000);
     }
-
     document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
     document.getElementById('next').addEventListener('click', () => goTo(current + 1));
-
     document.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft') goTo(current - 1);
       if (e.key === 'ArrowRight') goTo(current + 1);
     });
-
     resetTimer();
   </script>
 
