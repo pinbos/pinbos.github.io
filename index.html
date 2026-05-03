@@ -30,20 +30,31 @@
       width: 100%;
       background: #0d0c0c;
       border-bottom: 1px solid rgba(184,151,90,0.15);
-      padding: 10px 48px;
+      padding: 12px 48px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       gap: 32px;
     }
+
+    /* each item stacks its icon-row on top of the number */
     .top-bar-item {
       display: flex;
-      align-items: center;
-      gap: 8px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
     }
+
+    /* icon + label sit on one line */
+    .top-bar-item .icon-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .top-bar-item svg {
-      width: 12px;             /* was 13px */
-      height: 12px;            /* was 13px */
+      width: 13px;
+      height: 13px;
       stroke: var(--gold);
       fill: none;
       stroke-width: 1.5;
@@ -51,31 +62,35 @@
       stroke-linejoin: round;
       flex-shrink: 0;
     }
+
+    .top-bar-item .label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* address text and phone numbers */
     .top-bar-item a,
     .top-bar-item span.value {
       font-family: 'Jost', sans-serif;
-      font-weight: 400;        /* was 300 — now bold */
-      font-size: 21px;         /* was 11px — now bigger */
-      letter-spacing: 0.08em;  /* tightened slightly to suit larger size */
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.06em;
       color: var(--off-white);
       text-decoration: none;
       transition: color 0.2s ease;
-    }
-    
-    .top-bar-item .label {
-      font-family: 'Jost', sans-serif;
-      font-weight: 400;        /* was 200 — now bolder */
-      font-size: 20px;         /* was 10px — now bigger */
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-right: 2px;
+      padding-left: 19px; /* indent to align under the label text */
     }
     .top-bar-item a:hover { color: var(--gold-light); }
+
     .top-bar-divider {
       width: 1px;
-      height: 18px;
+      height: 36px;
       background: rgba(184,151,90,0.2);
+      align-self: center;
     }
 
     /* ── BANNER ── */
@@ -244,8 +259,8 @@
       .top-bar {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
-        padding: 12px 20px;
+        gap: 14px;
+        padding: 14px 20px;
       }
       .top-bar-divider { display: none; }
       header { padding: 20px 24px 16px; }
@@ -261,13 +276,16 @@
 
   <!-- ── TOP CONTACT BAR ── -->
   <div class="top-bar">
+
     <!-- Address -->
     <div class="top-bar-item">
-      <!-- pin icon -->
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-        <circle cx="12" cy="9" r="2.5"/>
-      </svg>
+      <div class="icon-row">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <span class="label">Address</span>
+      </div>
       <span class="value">120 N Pacific St, Unit A-11, San Marcos, CA 92069</span>
     </div>
 
@@ -275,25 +293,28 @@
 
     <!-- Showroom phone -->
     <div class="top-bar-item">
-      <!-- phone icon -->
-      <svg viewBox="0 0 24 24">
-        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.13 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-      </svg>
-      <span class="label">Showroom</span>
+      <div class="icon-row">
+        <svg viewBox="0 0 24 24">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.13 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        <span class="label">Showroom</span>
+      </div>
       <a href="tel:8775728244">877-572-8244</a>
     </div>
 
     <div class="top-bar-divider"></div>
 
-    <!-- Call or text -->
+    <!-- Call or Text -->
     <div class="top-bar-item">
-      <!-- message icon -->
-      <svg viewBox="0 0 24 24">
-        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-      </svg>
-      <span class="label">Call or Text</span>
+      <div class="icon-row">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        </svg>
+        <span class="label">Call or Text</span>
+      </div>
       <a href="tel:7609978141">760-997-8141</a>
     </div>
+
   </div>
 
   <!-- ── HEADER ── -->
